@@ -15,9 +15,12 @@ const db = mongoose.connection;
 db.once('open', function(){
   console.log("DB connected!")
 })
-
-app.use("room", roomRouter);
-app.use("user", userRouter);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use("/room", roomRouter);
+app.use("/user", userRouter);
 
 app.listen(port, "0.0.0.0", () => {
     console.log(`Listening on port ${port}`);

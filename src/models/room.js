@@ -1,16 +1,24 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-    roomName: String,
+    roomName: {
+      type: String,
+      required: true,
+    },
     roomNumberofPeople: {
       type: Number,
-      default: 1
+      default: 1,
+      required: true,
     },
-    roomMax: {
+    maxPeople: {
       type: Number,
-      default: 10
+      default: 10,
+      required: true,
     },
-    roomjoinedPeople:[mongoose.Schema.Types.ObjectId]
+    roomjoinedPeople:{
+      type: [mongoose.Schema.Types.ObjectId],
+      required: true,
+    }
   }, {timestamps: true});
   const TodoModel = mongoose.model("room", schema);
   

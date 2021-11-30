@@ -17,6 +17,12 @@ router.get("/", (req, res) => {
     });
 });
 
+router.delete("/:id", (req, res) => {
+    db.removeUser(req.params.id, () => {
+        res.status(200).send();
+    });
+});
+
 module.exports = router;
 
   
