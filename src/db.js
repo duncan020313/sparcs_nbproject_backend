@@ -11,8 +11,10 @@ function addRoom(roomName, maxPeople, callback){
     })
 }
 
-function addUser(name, address, account, callback){
+function addUser(id, password, name, address, account, callback){
     const newRoom = new userModel({
+        userId: id,
+        userPassword: password,
         userName: name,
         userAddress: address,
         userAccount: account
@@ -58,6 +60,17 @@ function removeUser(callback){
     })
 }
 
+function login(id, password, callback){
+    userModel.find({}, (error, result)=>{
+        if(error){
+            console.log(error);
+            callback([]);
+        }
+        else {
+            callback(result);
+        }
+    })
+}
 
 module.exports = {
     addRoom,
@@ -66,4 +79,5 @@ module.exports = {
     getUserinfo,
     removeRoom,
     removeUser,
+    login,
 };

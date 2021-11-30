@@ -6,7 +6,9 @@ router.post("/", (req, res) => {
     const userName = req.body.userName;
     const userAddress = req.body.userAddress;
     const userAccount = req.body.userAccount;
-    db.addUser(userName, userAddress, userAccount, (newItem) => {
+    const userId = req.body.userId;
+    const userPassword=  req.body.userPassword;
+    db.addUser(userId, userPassword, userName, userAddress, userAccount, (newItem) => {
         res.json(newItem);
     });
 });
@@ -20,6 +22,12 @@ router.get("/", (req, res) => {
 router.delete("/:id", (req, res) => {
     db.removeUser(req.params.id, () => {
         res.status(200).send();
+    });
+});
+
+router.get("/:id/:password", (req, res) => {
+    db.login(req.params.id, req.params.password, (item) => {
+        res.json(item);
     });
 });
 
