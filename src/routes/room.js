@@ -5,7 +5,8 @@ const router  = express.Router();
 router.post("/", (req, res) => {
     const roomName = req.body.roomName;
     const maxPeople = req.body.maxPeople;
-    db.addRoom(roomName, maxPeople, (newItem) => {
+    const userId = req.body.userId;
+    db.addRoom(roomName, maxPeople, userId, (newItem) => {
         res.json(newItem);
     });
 });
@@ -16,12 +17,24 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/:id", (req, res) => {
+    db.getRoominfoWithUserID(req.params.id, (items) => {
+        res.json(items);
+    });
+});
+
+
 router.delete("/:id", (req, res) => {
     db.removeRoom(req.params.id, () => {
         res.status(200).send();
     });
 });
 
+router.delete("/:userId/:roomId/:numOfpeople", (req, res) => {
+    db.removeUserinRoom(req.params.userId, req.params.roomId, req.params.numOfpeople, () => {
+        res.status(200).send();
+    });
+});
 
 module.exports = router;
 
