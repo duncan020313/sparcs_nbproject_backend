@@ -4,7 +4,7 @@ const userModel = require("./models/user")
 function addRoom(roomName, maxPeople, restaurant, userId, callback){
     const newRoom = new roomModel({
         roomName: roomName,
-        roomMax: maxPeople,
+        maxPeople: maxPeople,
         roomjoinedPeople: [userId],
         restaurant: restaurant,
     })
@@ -84,7 +84,8 @@ function removeUser(callback){
 }
 
 function login(id, password, callback){
-    userModel.find({userId:id, userPassword: password}, (error, result)=>{
+    userModel.find({userId:id, userPassword:password}, (error, result)=>{
+        console.log(result)
         if(error){
             console.log(error);
             callback([]);

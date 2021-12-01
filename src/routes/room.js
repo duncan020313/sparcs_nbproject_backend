@@ -4,7 +4,7 @@ const router  = express.Router();
 
 router.post("/", (req, res) => {
     const roomName = req.body.roomName;
-    const maxPeople = req.body.maxPeople;
+    const maxPeople = req.body.roomMaxPeople;
     const userId = req.body.userId;
     const restaurant = req.body.restaurant;
     db.addRoom(roomName, maxPeople, restaurant, userId, (newItem) => {
