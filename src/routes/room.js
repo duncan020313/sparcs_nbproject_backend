@@ -6,7 +6,8 @@ router.post("/", (req, res) => {
     const roomName = req.body.roomName;
     const maxPeople = req.body.maxPeople;
     const userId = req.body.userId;
-    db.addRoom(roomName, maxPeople, userId, (newItem) => {
+    const restaurant = req.body.restaurant;
+    db.addRoom(roomName, maxPeople, restaurant, userId, (newItem) => {
         res.json(newItem);
     });
 });

@@ -10,6 +10,10 @@ const schema = new mongoose.Schema({
       default: 1,
       required: true,
     },
+    restaurant: {
+      type: String,
+      required: true,
+    },
     maxPeople: {
       type: Number,
       default: 10,

@@ -1,11 +1,12 @@
 const roomModel = require("./models/room")
 const userModel = require("./models/user")
 
-function addRoom(roomName, maxPeople, userId, callback){
+function addRoom(roomName, maxPeople, restaurant, userId, callback){
     const newRoom = new roomModel({
         roomName: roomName,
         roomMax: maxPeople,
         roomjoinedPeople: [userId],
+        restaurant: restaurant,
     })
     newRoom.save((error, result)=>{
         callback(result)
