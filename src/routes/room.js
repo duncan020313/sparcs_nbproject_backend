@@ -25,6 +25,11 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.get("/getuserlist/:idlist", (req, res)=>{
+    db.getUserListInRoom(req.params.idlist, (items)=>{
+        res.json(items);
+    })
+})
 
 router.delete("/:id", (req, res) => {
     db.removeRoom(req.params.id, () => {

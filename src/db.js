@@ -75,6 +75,19 @@ function getUserinfo(callback){
     })
 }
 
+function getUserListInRoom(userIdList, callback){
+    console.log(userIdList)
+    userModel.find({_id:{$in: userIdList}}, (error, result)=>{
+        if(error){
+            console.log(error);
+            callback([]);
+        }
+        else {
+            callback(result);
+        }
+    })
+}
+
 function removeRoom(id, callback){
     roomModel.deleteOne({"_id":id}, (error)=>{
         callback();
@@ -135,6 +148,7 @@ module.exports = {
     getRoominfoWithUserID,
     getUserinfo,
     getUserinfoWithId,
+    getUserListInRoom,
     removeRoom,
     removeUserinRoom,
     addUserinRoom,
