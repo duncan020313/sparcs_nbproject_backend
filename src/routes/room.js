@@ -25,6 +25,12 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.get("/findoneroom/:roomid", (req,res)=>{
+    db.getRoomWithRoomId(req.params.roomid, (items)=>{
+        res.json(items);
+    });
+})
+
 router.get("/getuserlist/:idlist", (req, res)=>{
     db.getUserListInRoom(req.params.idlist.split(","), (items)=>{
         res.json(items);

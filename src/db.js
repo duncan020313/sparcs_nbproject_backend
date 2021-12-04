@@ -39,6 +39,17 @@ function getRoominfo(callback){
     })
 }
 
+function getRoomWithRoomId(roomId, callback){
+    roomModel.findOne({_id:roomId}, (error, result)=>{
+        if(error){
+            console.log(error);
+            callback([]);
+        }
+        else {
+            callback(result);
+        }
+    })
+}
 function getRoominfoWithUserID(userId, callback){
     roomModel.find({roomjoinedPeople:userId}, (error, result)=>{
         if(error){
@@ -76,7 +87,6 @@ function getUserinfo(callback){
 }
 
 function getUserListInRoom(userIdList, callback){
-    console.log(userIdList)
     userModel.find({_id:{$in: userIdList}}, (error, result)=>{
         if(error){
             console.log(error);
@@ -147,6 +157,7 @@ module.exports = {
     getRoominfo,
     getRoominfoWithUserID,
     getUserinfo,
+    getRoomWithRoomId,
     getUserinfoWithId,
     getUserListInRoom,
     removeRoom,
