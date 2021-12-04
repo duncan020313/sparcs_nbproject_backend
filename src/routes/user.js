@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get(":id", (req, res) => {
+router.get("/:id", (req, res) => {
     db.getUserinfoWithId(req.params.id, (items)=>{
         res.json(items)
     });
