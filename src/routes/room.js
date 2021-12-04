@@ -31,10 +31,17 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-router.delete("/:userId/:roomId/:numOfpeople", (req, res) => {
-    db.removeUserinRoom(req.params.userId, req.params.roomId, req.params.numOfpeople, () => {
-        res.status(200).send();
-    });
+router.put("/:userId/:roomId/:numOfpeople/:isremove", (req, res) => {
+    if(req.params.isremove=='true'){
+        db.removeUserinRoom(req.params.userId, req.params.roomId, req.params.numOfpeople, () => {
+            res.status(200).send();
+        });
+    }
+    else{
+        db.addUserinRoom(req.params.userId, req.params.roomId, req.params.numOfpeople, () => {
+            res.status(200).send();
+        })
+    }
 });
 
 module.exports = router;

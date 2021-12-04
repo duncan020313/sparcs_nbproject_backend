@@ -63,14 +63,23 @@ function getUserinfo(callback){
 }
 
 function removeRoom(id, callback){
-    roomModel.deleteOne({_id:id}, (error)=>{
+    roomModel.deleteOne({"_id":id}, (error)=>{
         callback();
     })
 }
 
 function removeUserinRoom(userId, roomId, numOfpeople, callback){
     roomModel.updateOne({_id:roomId}, {
-        $pop : {roomjoinedPeople:userId},
+        $pull : {roomjoinedPeople:userId},
+        $set : {roomNumberofPeople: numOfpeople}
+    }, (error)=>{
+        callback();
+    })
+}
+
+function addUserinRoom(userId, roomId, numOfpeople, callback){
+    roomModel.updateOne({_id:roomId}, {
+        $push : {roomjoinedPeople:userId},
         $set : {roomNumberofPeople: numOfpeople}
     }, (error)=>{
         callback();
@@ -96,6 +105,8 @@ function login(id, password, callback){
     })
 }
 
+
+
 module.exports = {
     addRoom,
     addUser,
@@ -104,6 +115,7 @@ module.exports = {
     getUserinfo,
     removeRoom,
     removeUserinRoom,
+    addUserinRoom,
     removeUser,
     login,
 };
