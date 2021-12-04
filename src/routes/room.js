@@ -26,7 +26,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.get("/getuserlist/:idlist", (req, res)=>{
-    db.getUserListInRoom(req.params.idlist, (items)=>{
+    db.getUserListInRoom(req.params.idlist.split(","), (items)=>{
         res.json(items);
     })
 })
