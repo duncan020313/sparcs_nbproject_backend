@@ -7,7 +7,8 @@ router.post("/", (req, res) => {
     const maxPeople = req.body.roomMaxPeople;
     const userId = req.body.userId;
     const restaurant = req.body.restaurant;
-    db.addRoom(roomName, maxPeople, restaurant, userId, (newItem) => {
+    const roomMasterId = req.body.roomMasterId
+    db.addRoom(roomName, maxPeople, restaurant, userId, roomMasterId, (newItem) => {
         res.json(newItem);
     });
 });
@@ -43,6 +44,12 @@ router.put("/:userId/:roomId/:numOfpeople/:isremove", (req, res) => {
         })
     }
 });
+
+router.put("/:userId/:roomId", (req, res) => {
+    db.updateMasterUser(req.params.userId, req.params.roomId, () => {
+        res.status(200).send();
+    })
+})
 
 module.exports = router;
 

@@ -22,8 +22,11 @@ const schema = new mongoose.Schema({
     roomjoinedPeople:{
       type: [mongoose.Schema.Types.ObjectId],
       required: true,
-    }
+    },
+    masterUserId:{
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+    },
   }, {timestamps: true});
-  const TodoModel = mongoose.model("room", schema);
   
-  module.exports = TodoModel
+  module.exports = mongoose.model("room", schema);

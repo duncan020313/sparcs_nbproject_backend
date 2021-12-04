@@ -1,12 +1,13 @@
 const roomModel = require("./models/room")
 const userModel = require("./models/user")
 
-function addRoom(roomName, maxPeople, restaurant, userId, callback){
+function addRoom(roomName, maxPeople, restaurant, userId, master, callback){
     const newRoom = new roomModel({
         roomName: roomName,
         maxPeople: maxPeople,
         roomjoinedPeople: [userId],
         restaurant: restaurant,
+        masterUserId: master,
     })
     newRoom.save((error, result)=>{
         callback(result)
@@ -19,7 +20,7 @@ function addUser(id, password, name, address, account, callback){
         userPassword: password,
         userName: name,
         userAddress: address,
-        userAccount: account
+        userAccount: account,        
     })
     newRoom.save((error, result)=>{
         callback(result)
@@ -92,6 +93,14 @@ function removeUser(callback){
     })
 }
 
+function updateMasterUser(userId, roomId, callback){
+    roomModel.updateOne({_id:roomId}, {
+        $set : {masterUserId: userId}
+    }, (error)=>{
+        callback();
+    })
+}
+
 function login(id, password, callback){
     userModel.find({userId:id, userPassword:password}, (error, result)=>{
         console.log(result)
@@ -117,5 +126,6 @@ module.exports = {
     removeUserinRoom,
     addUserinRoom,
     removeUser,
+    updateMasterUser,
     login,
 };
