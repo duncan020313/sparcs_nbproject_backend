@@ -51,6 +51,18 @@ function getRoominfoWithUserID(userId, callback){
     })
 }
 
+function getUserinfoWithId(userId, callback){
+    userModel.find({_id:userId}, (error, result)=>{
+        if(error){
+            console.log(error);
+            callback([]);
+        }
+        else {
+            callback(result);
+        }
+    })
+}
+
 function getUserinfo(callback){
     userModel.find({}, (error, result)=>{
         if(error){
@@ -122,6 +134,7 @@ module.exports = {
     getRoominfo,
     getRoominfoWithUserID,
     getUserinfo,
+    getUserinfoWithId,
     removeRoom,
     removeUserinRoom,
     addUserinRoom,

@@ -19,6 +19,12 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get(":id", (req, res) => {
+    db.getUserinfoWithId(req.params.id, (items)=>{
+        res.json(items)
+    });
+});
+
 router.delete("/:id", (req, res) => {
     db.removeUser(req.params.id, () => {
         res.status(200).send();
