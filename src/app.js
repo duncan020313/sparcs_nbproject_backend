@@ -6,7 +6,7 @@ const userRouter = require("./routes/user");
 const app = express();
 const port = 8080;
 
-mongoose.connect('mongodb://root:don020313@ssal.sparcs.org:41231?authSource=admin', {
+mongoose.connect('mongodb://root:29h998ahh98hf9h2jauhuihawiehif@ssal.sparcs.org:41231?authSource=admin', {
   useNewUrlParser : true,
   useUnifiedTopology : true
 })
