@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const roomRouter = require("./routes/room");
 const userRouter = require("./routes/user");
 const app = express();
-const port = 8080;
+const port = 80;
 
 mongoose.connect('mongodb://root:29h998ahh98hf9h2jauhuihawiehif@ssal.sparcs.org:41231?authSource=admin', {
   useNewUrlParser : true,
