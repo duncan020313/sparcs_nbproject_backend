@@ -15,6 +15,7 @@ const db = mongoose.connection;
 db.once('open', function(){
   console.log("DB connected!")
 })
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
